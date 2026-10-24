@@ -30,12 +30,12 @@ function render(){
 function openReader(id){
  const entry=state.entries.find(e=>e.id===id);if(!entry)return;
  const questions=entry.questions||[{body:entry.body,solution:entry.solution,images:entry.images}];
- $('#readerContent').innerHTML=`<div class="dialog-head"><div class="reader-meta"><span class="pill">${entry.questions?entry.examYear+'년 기출':names[entry.type]}</span>${entry.questions?`<span>문제 ${questions.length}개</span>`:''}</div><button class="icon" id="closeReader" aria-label="닫기">×</button></div><h2 class="reader-title">${esc(entry.title)}</h2><div class="reader-path">${entry.year}학년 / ${entry.semester}학기 / ${esc(subject(entry.subject))} / ${names[entry.exam]}</div>${entry.questions?`<nav class="question-tabs" aria-label="문제 번호 바로가기">${questions.map((_,i)=>`<button data-jump="${i}">${i+1}번</button>`).join('')}</nav><div class="solution-controls"><button class="secondary" id="expandSolutions">풀이 전체 펼치기</button><button class="secondary" id="collapseSolutions">풀이 전체 접기</button></div>`:''}${questions.map((q,i)=>`<section class="bundle-question" id="question${i}"><h3>${entry.questions?i+1+'번 문제':'문제 · 개념'}</h3><div class="prose">${markdown(q.body)}</div><div class="reader-images">${q.images.map((src,n)=>`<img src="${esc(src)}" alt="문제 이미지 ${n+1}" loading="lazy">`).join('')}</div><details class="question-solution" open><summary>${entry.questions?'풀이 · 정답':'나의 풀이 · 생각'}</summary><div class="prose">${markdown(q.solution||'아직 풀이가 없습니다.')}</div></details></section>`).join('')}`;
- $('#closeReader').onclick=()=>$('#reader').close();
+ $('#readerContent').innerHTML=`<div class="dialog-head"><div class="reader-meta"><span class="pill">${entry.questions?entry.examYear+'년 기출':names[entry.type]}</span>${entry.questions?`<span>문제 ${questions.length}개</span>`:''}</div><button class="reader-back" id="closeReader">← 목록으로</button></div><h2 class="reader-title">${esc(entry.title)}</h2><div class="reader-path">${entry.year}학년 / ${entry.semester}학기 / ${esc(subject(entry.subject))} / ${names[entry.exam]}</div>${entry.questions?`<nav class="question-tabs" aria-label="문제 번호 바로가기">${questions.map((_,i)=>`<button data-jump="${i}">${i+1}번</button>`).join('')}</nav><div class="solution-controls"><button class="secondary" id="expandSolutions">풀이 전체 펼치기</button><button class="secondary" id="collapseSolutions">풀이 전체 접기</button></div>`:''}${questions.map((q,i)=>`<section class="bundle-question" id="question${i}"><h3>${entry.questions?i+1+'번 문제':'문제 · 개념'}</h3><div class="prose">${markdown(q.body)}</div><div class="reader-images">${q.images.map((src,n)=>`<img src="${esc(src)}" alt="문제 이미지 ${n+1}" loading="lazy">`).join('')}</div><details class="question-solution" open><summary>${entry.questions?'풀이 · 정답':'나의 풀이 · 생각'}</summary><div class="prose">${markdown(q.solution||'아직 풀이가 없습니다.')}</div></details></section>`).join('')}`;
+ $('#closeReader').onclick=()=>ArchiveReader.close();
  if($('#expandSolutions'))$('#expandSolutions').onclick=()=>$$('.question-solution').forEach(d=>d.open=true);
  if($('#collapseSolutions'))$('#collapseSolutions').onclick=()=>$$('.question-solution').forEach(d=>d.open=false);
  $$('[data-jump]').forEach(b=>b.onclick=()=>$('#question'+b.dataset.jump).scrollIntoView({behavior:'smooth',block:'start'}));
- $('#reader').showModal();$('#reader').scrollTop=0;
+ ArchiveReader.open(entry.id);
 }
 $$('.nav').forEach(b=>b.onclick=()=>{filter=null;view=b.dataset.view;render();$('#sidebar').classList.remove('open');});
 $('#search').oninput=$('#typeFilter').onchange=$('#sort').onchange=render;
@@ -43,5 +43,6 @@ $('#gridBtn').onclick=()=>{$('#entries').classList.remove('list');$('#gridBtn').
 $('#listBtn').onclick=()=>{$('#entries').classList.add('list');$('#listBtn').classList.add('selected');$('#gridBtn').classList.remove('selected');};
 $('#mobileMenu').onclick=()=>$('#sidebar').classList.toggle('open');
 document.addEventListener('click',e=>{if(innerWidth<=720&&!e.target.closest('#sidebar,#mobileMenu'))$('#sidebar').classList.remove('open');});
-document.addEventListener('keydown',e=>{if(e.key==='/'&&!e.target.matches('input,textarea,select')&&!$('#reader').open){e.preventDefault();$('#search').focus();}});
+document.addEventListener('keydown',e=>{if(e.key==='/'&&!e.target.matches('input,textarea,select')&&!ArchiveReader.isOpen()){e.preventDefault();$('#search').focus();}});
 render();
+ArchiveReader.start(openReader);
