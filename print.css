@@ -1,0 +1,41 @@
+.print-controls{padding:14px 16px;background:#edf3ff;border:1px solid #d5e2f7;border-radius:8px;margin:0 0 22px}
+.print-control-row{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.print-control-row label{font-size:12px;font-weight:600;color:#48648d}
+.print-control-row select{font-size:13px;color:#354f76;min-width:180px}
+.print-control-row button{font-size:13px;padding:8px 14px;background:white}
+.print-controls p{font-size:11px;color:#71829e;margin:10px 0 0}
+#printFeedback:empty{display:none}
+#printDocument{display:none}
+#printDocument.print-measuring{display:block!important;position:absolute;left:-100000px;top:0;width:180mm;background:#fff}
+#printDocument.print-measuring .prose{font-size:9pt;line-height:1.7}
+#printDocument.print-measuring .katex{font-size:1em}
+@page{size:A4 portrait;margin:16mm 15mm 18mm}
+@media print{
+ body.printing-archive{margin:0!important;background:#fff!important;color:#111!important;font-size:9pt}
+ body.printing-archive>*:not(#printDocument){display:none!important}
+ body.printing-archive>#printDocument{display:block!important;color:#111;background:#fff;width:auto;margin:0;padding:0}
+ #printDocument *{box-shadow:none!important;text-shadow:none!important}
+ #printDocument .print-heading{display:block;height:auto;padding:0 0 7mm;margin:0 0 7mm;border:0;border-bottom:1px solid #777;break-inside:avoid}
+ #printDocument .print-heading p{font-size:7pt;color:#555;margin:0 0 3mm}
+ #printDocument .print-heading h1{font-size:18pt;line-height:1.35;letter-spacing:-.5pt;margin:0 0 3mm}
+ #printDocument .print-heading div{font-size:8pt;color:#333;line-height:1.6}
+ #printDocument .print-question{padding:0;margin:0 0 9mm;break-inside:avoid;page-break-inside:avoid;orphans:3;widows:3}
+ /* Keep a question and its diagram together; oversized blocks may still flow across pages. */
+ #printDocument .print-prompt{break-inside:avoid;page-break-inside:avoid}
+ #printDocument .print-solution{break-inside:auto;page-break-inside:auto}
+ #printDocument .print-question h2{font-size:11pt;margin:0 0 3mm;line-height:1.5;break-after:avoid}
+ #printDocument .prose{font-size:9pt;line-height:1.7;color:#111;overflow-wrap:anywhere}
+ #printDocument .prose p{margin:2mm 0;orphans:3;widows:3}
+ #printDocument .prose h3,#printDocument .prose h4{color:#111;break-after:avoid}
+ #printDocument .prose .katex{font-size:1em;color:#111}
+ #printDocument .katex-display{overflow:visible;padding:1mm 0;margin:3mm 0;break-inside:avoid}
+ #printDocument .katex-display>.katex{white-space:nowrap}
+ #printDocument .print-solution{margin-top:5mm;padding-top:3mm;border-top:1px solid #bbb;background:transparent}
+ #printDocument .print-solution h3{font-size:9pt;margin:0 0 2mm;break-after:avoid;color:#111}
+ #printDocument .print-answer-sheet{break-before:page;page-break-before:always}
+ #printDocument .attached-figure{break-inside:avoid;margin:4mm auto;max-width:100%}
+ #printDocument .attached-figure img{display:block;width:100%;height:auto;max-width:100%;max-height:225mm;object-fit:contain;margin:0}
+ #printDocument pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#fff;border:1px solid #ddd;padding:3mm}
+ #printDocument a{color:#111;text-decoration:none}
+ #printDocument .math-error{background:transparent;color:#111;border-bottom:1px dashed #888}
+}

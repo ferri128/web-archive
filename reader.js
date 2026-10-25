@@ -35,7 +35,7 @@ function openReader(id){
  if($('#expandSolutions'))$('#expandSolutions').onclick=()=>$$('.question-solution').forEach(d=>d.open=true);
  if($('#collapseSolutions'))$('#collapseSolutions').onclick=()=>$$('.question-solution').forEach(d=>d.open=false);
  $$('[data-jump]').forEach(b=>b.onclick=()=>$('#question'+b.dataset.jump).scrollIntoView({behavior:'smooth',block:'start'}));
- ArchiveReader.open(entry.id);
+ ArchivePrint.mount(entry,subject(entry.subject));ArchiveReader.open(entry.id);
 }
 $$('.nav').forEach(b=>b.onclick=()=>{filter=null;view=b.dataset.view;render();$('#sidebar').classList.remove('open');});
 $('#search').oninput=$('#typeFilter').onchange=$('#sort').onchange=render;
