@@ -72,3 +72,27 @@ header > .avatar{margin-left:auto}
 @media(max-width:720px){#reader.reader-page{padding:24px 20px 45px}.reader-page .reader-title{font-size:26px}.reader-page .prose{font-size:14px}}
 
 #reader.reader-page[hidden]{display:none}
+
+.reader-images .attached-figure,#imagePreviews .attached-figure{margin:18px auto;max-width:100%}
+.reader-images .attached-figure img,#imagePreviews .attached-figure img{display:block;width:100%;height:auto;max-width:100%;max-height:none;object-fit:contain;margin:0;border:0;border-radius:5px}
+#imagePreviews{display:grid;grid-template-columns:1fr;gap:16px}
+#imagePreviews .image-attachment{padding:14px;border:1px solid #cfddf2;border-radius:8px;background:#fff}
+.image-attachment-head{display:flex;align-items:center;justify-content:space-between;font-size:12px;color:#48648d}
+#imagePreviews .image-attachment-head button{position:static;width:26px;height:26px;font-size:20px;color:#a4455b;background:#fff0f3;border-radius:5px}
+.image-preview-stage{max-height:360px;overflow:auto;margin:10px 0;border:1px dashed #d6e2f5;border-radius:5px;background:#f9fbff}
+.image-size-controls{display:flex;align-items:center;gap:8px;flex-wrap:wrap;font-size:11px}
+#entryForm .image-size-controls label{display:block;margin:0;color:#4d678d;min-width:70px}
+.image-size-controls input[type=range]{flex:1;min-width:120px;padding:0;border:0;accent-color:#3168d5}
+#imagePreviews .image-size-controls button{position:static;width:auto;height:auto;border:1px solid #d1dff5;background:#edf3ff;border-radius:4px;padding:5px 8px;font-size:11px;color:#3862a6}
+
+/* Increase editor typography by 2pt while keeping the reading page unchanged. */
+#editor{font-size:calc(14px + 2pt)}
+#editor input:not([type=range]),#editor textarea{font-size:calc(13px + 2pt)}
+#editor select{font-size:calc(12px + 2pt)}
+#editor label{font-size:calc(11px + 2pt)}
+#editor .math-field-head label{font-size:calc(12px + 2pt)}
+#editor .math-preview{font-size:calc(14px + 2pt)}
+#editor .preview-placeholder{font-size:calc(12px + 2pt)}
+#editor .math-tools button,#editor .preview-toggle,#editor .math-help,#editor .math-feedback,#editor .image-drop-zone span,#editor .image-size-controls,#editor .image-size-controls button{font-size:calc(11px + 2pt)}
+#editor .form-hint{font-size:calc(10px + 2pt)}
+#editor .question-tabs button,#editor .image-attachment-head{font-size:calc(12px + 2pt)}
