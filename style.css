@@ -96,3 +96,22 @@ header > .avatar{margin-left:auto}
 #editor .math-tools button,#editor .preview-toggle,#editor .math-help,#editor .math-feedback,#editor .image-drop-zone span,#editor .image-size-controls,#editor .image-size-controls button{font-size:calc(11px + 2pt)}
 #editor .form-hint{font-size:calc(10px + 2pt)}
 #editor .question-tabs button,#editor .image-attachment-head{font-size:calc(12px + 2pt)}
+
+/* Code answers share the existing problem and solution layout. */
+.solution-options{display:flex;gap:16px;align-items:end;margin-bottom:12px;flex-wrap:wrap}
+.solution-options label{display:grid;gap:6px;min-width:140px}
+.solution-options [hidden],[data-field="solution"] [hidden]{display:none!important}
+#editor textarea.code-input{font-family:Consolas,'Courier New',monospace;tab-size:4;line-height:1.65;white-space:pre;overflow:auto;min-height:280px}
+.prose pre{max-width:100%;overflow:auto;tab-size:4;text-align:left}
+.prose pre code{font-family:Consolas,'Courier New',monospace;white-space:pre;overflow-wrap:normal;word-break:normal}
+
+/* The native textarea handles editing; the matching layer below colors the source. */
+.solution-code-editor{position:relative;min-width:0;background:#fff}
+.solution-code-editor textarea{display:block;position:relative;z-index:1}
+.code-overlay{position:absolute;inset:0;overflow:hidden;pointer-events:none;z-index:0}
+#editor .code-overlay pre,#editor textarea.code-input{font-family:Consolas,'Courier New',monospace;font-size:calc(13px + 2pt);font-weight:400;line-height:1.65;letter-spacing:normal;tab-size:4;padding:16px;border:0;border-radius:0;margin:0;text-align:left;white-space:pre;word-break:normal;overflow-wrap:normal;font-variant-ligatures:none}
+#editor .code-overlay pre{width:max-content;min-width:100%;min-height:100%;color:#24344d;background:transparent}
+#editor .is-code textarea{color:transparent;background:transparent;caret-color:#24344d;-webkit-text-fill-color:transparent}
+#editor .is-code textarea::placeholder{color:#7b8aa3;-webkit-text-fill-color:#7b8aa3}
+#editor .is-code textarea::selection{background:#3168d540}
+.syntax-keyword{color:#8734b5}.syntax-type{color:#176c9d}.syntax-builtin{color:#985a12}.syntax-string{color:#247044}.syntax-comment{color:#647589;font-style:italic}.syntax-number{color:#b35317}.syntax-function{color:#215ca8}.syntax-directive{color:#9b3f71}
